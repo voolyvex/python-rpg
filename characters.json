@@ -1,0 +1,29 @@
+{
+    "Hercules": 
+        {
+            "Health": 50, 
+            "Attack": 
+                {
+                    "Sword": 18,
+                    "Fist": 10
+                }
+        },
+    "Nemean Lion":
+        {
+            "Health": 20,
+            "Attack": 
+            {
+                "Claw": 5, 
+                "Roar": 9
+            }
+        },
+    "Cerberus": 
+        {
+            "Health": 40, 
+            "Attack": 
+                {
+                    "Bite": 11, 
+                    "Strength of Hades": 13
+                }
+        }
+}
