@@ -1,13 +1,66 @@
-import random
 import json
+import random
+import sys
 
 #characters = {"Hercules": {"Health": 50, "Attack": {"Sword": 18}}, "Nemean Lion": {"Health": 50, "Attack": {"Claw": 5, "Roar": 9}}, "Cerberus": {"Health": 50, "Attack": {"Bite": 11, "Strength of Hades", 13}}
-
-def main():
-    with open("characters.json") as file:
+with open("characters.json") as file:
         character_dict = json.load(file)
 
-    print(character_dict)
+def victory(monster):
+    print("Wow, you defeated " + monster + ".")
+    user_prompt = input("Continue? (y/n): ").strip().lower()
+    while user_prompt not in ["y","n"]:
+        user_prompt = input("Continue? (y/n): ").strip().lower()
+    if user_prompt == "n":
+        print("\nGame Over")
+        sys.exit()
+    else:
+        equip_prompt = input("Equip the Lion Skin? (y/n): ").strip().lower()
+        while user_prompt not in ["y","n"]:
+            user_prompt = input("Equip the Lion Skin? (y/n): ").strip().lower()
+            if user_prompt == "n":
+                print("\nYou leave the lion's skin as is and depart.")
+            else:
+                print("Lion Skin equipped")
+                character_dict.
+def boss_fight(boss, hero):        
+    print("You are in a boss fight vs", boss)
+    print("Commands:\nAttack\nItem")
+    while (character_dict[boss]["Health"] > 0) and (character_dict[hero]["Health"] > 0):
+        print(hero, "HP: ", character_dict[hero]["Health"])
+        print(boss, "HP: ", character_dict[boss]["Health"])
+        action = input("Choose an action: ").strip().lower()
+        if action == "attack":
+            attack_damage = attack()
+            character_dict[boss]["Health"] -= attack_damage
+            random_attack(boss)
+        elif action == "item":
+            item_effect = item()
+            character_dict[hero]["Health"] += item_effect
+            random_attack(boss)
+    if (character_dict[boss]["Health"] <= 0):
+        victory(boss)
+    else:
+        death()
+
+def attack():
+    # choose which attack
+    return(10)
+def item():
+    print("Hercules has: Boar Meat")
+    # confirm item use
+    return(25)
+def random_attack(boss):
+    attack_int = random.randrange(0,1)
+    if attack_int == 0:
+        print(boss, "attacks with", character_dict[boss]["Attack"][0][0])
+        damage = character_dict[boss]["Attack"][0][1]
+    else:
+        print(boss, "attacks with", character_dict[boss]["Attack"][1][0])
+        damage = character_dict[boss]["Attack"][1][1]
+    return(damage)
+
+def main():
     
     print("""
         \nYou are Hercules, the greatest of the Greek Heroes!
@@ -24,11 +77,8 @@ impossible nine-headed Lernaean Hydra, and capture the guard dog of the underwor
         \nYou make the long journey to the Nemean Lion.
 The lion laughs and snarls, 'You dare challenge me?'\n
 """)
-        boss_fight(characters["Nemean Lion"])
-    
-def boss_fight(boss):
-    print("You are in a boss fight vs", boss)
-   
+        hero = "Hercules"
+        boss_fight("Nemean Lion", hero)
 
 
 
