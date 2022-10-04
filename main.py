@@ -3,12 +3,12 @@ import random
 import sys
 from time import sleep as s
 
+
 def run():
     with open("characters.json") as file:
         character_dict = json.load(file)
+
     hero = "Herakles"
-    # defense = 0
-    # boar_meat = int(3)
 
     def death(monster):
         print("You were killed by " + monster + ".")
@@ -43,8 +43,9 @@ def run():
                     print("You leave the lion's skin as is and depart.")
                     s(1)
                 elif equip_prompt == "y":
+                    character_dict[hero]["Defense"] = 2
                     print("Lion Skin equipped\nDefense +2")
-                    defense += 2
+                    s(1)
             elif monster == "Lernaean Hydra":
                 s(1)
                 print("You severed the immortal head.")
@@ -148,7 +149,7 @@ def run():
                 s(1)
                 print(hero, "inflicts", attack_damage, "damage")
                 hero_damaged = random_attack(boss)
-                hero_health -= hero_damaged + defense
+                hero_health = (hero_health - hero_damaged) + defense
                 s(1)
                 print(boss, "inflicts", hero_damaged, "damage\n")
                 if hero_health <= 0:
@@ -170,7 +171,7 @@ def run():
                 s(1)
                 print("You have", boar_meat, "Boar Meat(s) left.\n")
                 hero_damaged = random_attack(boss)
-                hero_health -= hero_damaged + defense
+                hero_health = (hero_health - hero_damaged) + defense
                 s(1)
                 print(boss, "inflicts", hero_damaged, "damage\n")
                 s(1)
@@ -193,7 +194,7 @@ def run():
 
 
     def main():    
-        print("\nYou are Herakles, the greatest of the Greek Heroes!\nYou have been tasked by King Eurystheus to slay the\nvicious Nemean Lion, defeat the nine-headed Lernaean\nHydra, and capture Cerberus--the guard dog of the underworld.")
+        print("\nYou are Herakles of ancient legend.\nYou have been tasked by King Eurystheus to slay the\nvicious Nemean Lion, defeat the nine-headed Lernaean\nHydra, and capture Cerberus--the guard dog of the underworld.")
         s(2)
         user_prompt = input("\nStart Game (y/n): ").strip().lower()
         while user_prompt not in ["y","n"]:
@@ -207,12 +208,11 @@ def run():
             boss_fight("Nemean Lion")
             s(1)
             print("\nYou travel to the outskirts of Lerna and find the\nadorable lair of the Laernean Hydra.")
-            s(1)
-            print("\nOne of the nine heads hisses,'Dieeee.'")
+            print("One of the nine heads hisses, 'Dieeee.'")
             boss_fight("Lernaean Hydra")
             s(1)
             print("\nFinally, the entrance to Hell. Oh wow look it's Cerberus. Nice doggy.")
-            print("\tNiiiiice doggy!'\n")
+            print("\tNiiiiice doggy.'\n")
             boss_fight("Cerberus")
 
     main()
