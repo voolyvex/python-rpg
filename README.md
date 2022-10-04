@@ -1,2 +1,3 @@
 # python-rpg
-very basic text rpg
+mythology themed text rpg
+by voolyvex
