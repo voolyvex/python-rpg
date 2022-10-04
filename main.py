@@ -5,6 +5,18 @@ import sys
 #characters = {"Hercules": {"Health": 50, "Attack": {"Sword": 18}}, "Nemean Lion": {"Health": 50, "Attack": {"Claw": 5, "Roar": 9}}, "Cerberus": {"Health": 50, "Attack": {"Bite": 11, "Strength of Hades", 13}}
 with open("characters.json") as file:
         character_dict = json.load(file)
+defense = 0
+
+def death(monster):
+    print("You were killed by " + monster + ".")
+    new_game = input("Play again? (y/n): ").strip().lower()
+    while new_game not in ["y","n"]:
+        new_game = input("Play again? (y/n): ").strip().lower()
+    if new_game == "n":
+        print("\nGame Over")
+        sys.exit()
+    else:
+        main()
 
 def victory(monster):
     print("Wow, you defeated " + monster + ".")
@@ -16,16 +28,17 @@ def victory(monster):
         sys.exit()
     else:
         equip_prompt = input("Equip the Lion Skin? (y/n): ").strip().lower()
-        while user_prompt not in ["y","n"]:
-            user_prompt = input("Equip the Lion Skin? (y/n): ").strip().lower()
-            if user_prompt == "n":
+        while equip_prompt not in ["y","n"]:
+            equip_prompt = input("Equip the Lion Skin? (y/n): ").strip().lower()
+            if equip_prompt == "n":
                 print("\nYou leave the lion's skin as is and depart.")
             else:
-                print("Lion Skin equipped")
-                character_dict.
+                print("Lion Skin equipped\nDefense +2")
+                defense += 2
+                       # character_dict["Hercules"]
 def boss_fight(boss, hero):        
     print("You are in a boss fight vs", boss)
-    print("Commands:\nAttack\nItem")
+    print("Type text command:  'Attack' or 'Item'")
     while (character_dict[boss]["Health"] > 0) and (character_dict[hero]["Health"] > 0):
         print(hero, "HP: ", character_dict[hero]["Health"])
         print(boss, "HP: ", character_dict[boss]["Health"])
@@ -33,23 +46,34 @@ def boss_fight(boss, hero):
         if action == "attack":
             attack_damage = attack()
             character_dict[boss]["Health"] -= attack_damage
-            random_attack(boss)
+            hero_damaged = random_attack(boss)
+            character_dict[hero]["Health"] -= hero_damaged
+
         elif action == "item":
             item_effect = item()
             character_dict[hero]["Health"] += item_effect
-            random_attack(boss)
+            print(hero, " is healed +25 HP")
+            hero_damaged = random_attack(boss)
+            character_dict[hero]["Health"] -= hero_damaged
+            print(boss, "inflicts", hero_damaged, "damage")
+
     if (character_dict[boss]["Health"] <= 0):
         victory(boss)
     else:
-        death()
+        death(boss)
 
 def attack():
-    # choose which attack
+    attack_prompt = "Attack with Sword or Fist?\n Type text command:  'Sword' or 'Fist'"
     return(10)
+
 def item():
     print("Hercules has: Boar Meat")
-    # confirm item use
-    return(25)
+    item_prompt = input("Use item? Boar Meat (y/n): ").strip().lower()
+    if item_prompt == 'y':
+        return(25)
+    else:
+        return(25)
+
 def random_attack(boss):
     attack_int = random.randrange(0,1)
     if attack_int == 0:
@@ -65,7 +89,7 @@ def main():
     print("""
         \nYou are Hercules, the greatest of the Greek Heroes!
 You have been tasked by King Eurystheus to slay the vicious Nemean Lion, defeat the
-impossible nine-headed Lernaean Hydra, and capture the guard dog of the underworld — Cerberus.\n
+nine-headed Lernaean Hydra, and capture Cerberus, the guard dog of the underworld.\n
 """)
     user_prompt = input("Start Game (y/n): ").strip().lower()
     while user_prompt not in ["y","n"]:
