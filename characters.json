@@ -2,13 +2,14 @@
     "Herakles": 
         {
             "Health": 50, 
+            "Defense": 0,
             "Attack": 
                 [
                     ["Arrows", 7],
                     ["Bare Hand", 5],
                     ["Sword", 9]
                 ],
-            "Item": "Boar Meat"
+            "Item": {"Boar Meat": 3}
         },
     "Nemean Lion":
         {
