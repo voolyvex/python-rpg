@@ -117,13 +117,13 @@ def run():
             if boar_meat > 0:
                 boar_meat -= 1
                 character_dict[hero]["Item"]["Boar Meat"] = boar_meat
-                return(22, boar_meat)
+                return(22, boar_meat, False)
             elif boar_meat <= 0:
                 boar_meat = 0
                 print("You have no boar meat.\n")
-                return(0, boar_meat)
+                return(0, boar_meat, True)
         else:
-            return(0, boar_meat)
+            return(0, boar_meat, True)
         
         
     def random_attack(boss):
@@ -174,14 +174,18 @@ def run():
                     print(boss, "HP: ", boss_health)
 
             elif action == "item" or action == "i":
-                item_effect, boar_meat = item()
+                item_effect, boar_meat, ambush = item()
                 hero_health += item_effect
                 if hero_health >= 50:
                     hero_health = 50
                 s(1)
-                print(hero, "is healed +", item_effect, "HP\n")
+                print(hero, "is healed +", item_effect, "HP")
                 s(1)
                 print("You have", boar_meat, "Boar Meat(s) left.\n")
+                if ambush == True:
+                    print("While checking your inventory")
+                    s(1)
+                    print("you are ambushed.\n")
                 hero_damaged = random_attack(boss)
                 hero_health = (hero_health - hero_damaged) + defense
                 s(1)
