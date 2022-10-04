@@ -16,15 +16,15 @@ def run():
         while new_game not in ["y","n"]:
             new_game = input("Play again? (y/n): ").strip().lower()
         if new_game == "n":
-            print("\nGame Over")
+            print("\nGame Over\n")
             sys.exit()
         else:
             run()
 
     def victory(monster):
         defense = character_dict[hero]["Defense"]
-        print("Wow, you defeated " + monster + ".")
         if monster != "Cerberus":
+            print("Wow, you defeated " + monster + ".")
             user_prompt = input("Continue? (y/n): ").strip().lower()
             while user_prompt not in ["y","n"]:
                 user_prompt = input("Continue? (y/n): ").strip().lower()
@@ -38,7 +38,10 @@ def run():
                     equip_prompt = input("Equip the Lion Skin? (y/n): ").strip().lower()
                 s(1)
                 if equip_prompt == "n":
-                    print("\nYou think, 'Why wear clothing?'\nYou leave the lion's skin as is and depart.")
+                    print("\nYou think, 'Why wear clothing, I'm Herakles?!'")
+                    s(1)
+                    print("You leave the lion's skin as is and depart.")
+                    s(1)
                 elif equip_prompt == "y":
                     print("Lion Skin equipped\nDefense +2")
                     defense += 2
@@ -56,15 +59,21 @@ def run():
                     character_dict[hero]["Attack"][0] = ["Poison Arrows", 13]
         else:
             s(1)
-            print("You won the game!")
+            print("Congratulations! You captured Cerberus.")
+            s(1)
+            print("King Eurystheus is actually terrified of Cerberus,")
+            print("so you release him back to Hades.")
+            s(1)
+            print("You won the game.")
             s(1)
             print("Game by voolyvex")
             sys.exit()
 
     def both_die(monster):
-        print("Wow you defeated " + monster + "but"
         s(1)
-        print("you also died in the process :(")
+        print("\nWow you defeated " + monster + ",")
+        s(1)
+        print("but you also died in the process :(")
         s(1)
         new_game = input("Play again? (y/n): ").strip().lower()
         while new_game not in ["y","n","yes","no"]:
@@ -174,6 +183,7 @@ def run():
                     print(boss, "HP: ", 0)
                 else:
                     print(boss, "HP: ", boss_health)
+        character_dict[hero]["Health"] = hero_health
         if (boss_health <= 0) and (hero_health <= 0):
             both_die(boss)
         elif (boss_health <= 0):
@@ -189,16 +199,20 @@ def run():
         while user_prompt not in ["y","n"]:
             user_prompt = input("Start Game (y/n): ").strip().lower()
         if user_prompt == "n":
-            print("\nGame Over")
+            print("\nGame Over\n")
+            sys.exit()
         else:
             s(1)
             print("\nYou make the long & humbling journey to Nemea.\nThe Nemean Lion snarls, 'Dare thee challenge?!'")
             boss_fight("Nemean Lion")
             s(1)
-            print("\nYou travel to the outskirts of Lerna and find the adorable\nlair of the Laernean Hydra.\nOne of the nine heads hisses,\n'Dieeee.'")
+            print("\nYou travel to the outskirts of Lerna and find the\nadorable lair of the Laernean Hydra.")
+            s(1)
+            print("\nOne of the nine heads hisses,'Dieeee.'")
             boss_fight("Lernaean Hydra")
             s(1)
-            print("\nFinally, the entrance to Hell. Oh wow look it's Cerberus. Nice doggy.\nNiiiiice doggy!'\n")
+            print("\nFinally, the entrance to Hell. Oh wow look it's Cerberus. Nice doggy.")
+            print("\tNiiiiice doggy!'\n")
             boss_fight("Cerberus")
 
     main()
