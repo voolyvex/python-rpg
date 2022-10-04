@@ -1,11 +1,12 @@
 {
-    "Hercules": 
+    "Herakles": 
         {
             "Health": 50, 
             "Attack": 
                 [
-                    ["Sword", 18],
-                    ["Fist", 10]
+                    ["Arrows", 7],
+                    ["Bare Hand", 5],
+                    ["Sword", 9]
                 ],
             "Item": "Boar Meat"
         },
@@ -18,13 +19,13 @@
                 ["Roar", 9]
             ]
         },
-    "Lerneaen Hydra":
+    "Lernaean Hydra":
         {
             "Health": 30,
             "Attack": 
             [
-                ["Poison Gas", 7], 
-                ["Choke", 10]
+                ["Blood of Nessus", 11], 
+                ["Choker", 10]
             ]
         },
     "Cerberus": 
@@ -33,7 +34,7 @@
             "Attack": 
                 [
                     ["Bite", 11], 
-                    ["Strength of Hades", 13]
+                    ["Strength of Hades", 14]
                 ]
         }
 }
