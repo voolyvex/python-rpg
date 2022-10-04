@@ -66,6 +66,9 @@ def run():
             print("so you release him back to Hades.")
             s(1)
             print("You won the game.")
+            if defense == 0:
+                s(3)
+                print("'Skinless' bonus acheived!")
             s(1)
             print("Game by voolyvex")
             sys.exit()
@@ -96,6 +99,12 @@ def run():
         elif hero_attack_randomized == 2:
             print(hero, "attacks with", character_dict[hero]["Attack"][2][0])
             damage = character_dict[hero]["Attack"][2][1]
+        if random.random() > 0.8:
+            damage += random.choice([1,2,3,4])
+            print("\nCritical hit!\n")
+        elif random.random() < 0.05:
+            print(hero, "misses.")
+            damage = 0
         return(damage)
 
     def item():
@@ -125,6 +134,9 @@ def run():
         else:
             print(boss, "attacks with", character_dict[boss]["Attack"][1][0])
             damage = character_dict[boss]["Attack"][1][1]
+        if random.random() < 0.05:
+            print(boss, "misses.")
+            damage = 0
         return(damage)
 
     def boss_fight(boss):
