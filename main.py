@@ -57,7 +57,7 @@ def run():
                     print("\nYou decide that 'hard mode' is more fun and continue with non-poison arrows.")
                 elif equip_prompt == "y":
                     print("Poison Arrows equipped\nAttack Power +6")
-                    character_dict[hero]["Attack"][0] = ["Poison Arrows", 13]
+                    character_dict[hero]["Attack"][0] = ["Poison Arrows", 15]
         else:
             s(1)
             print("Congratulations! You captured Cerberus.")
@@ -108,7 +108,7 @@ def run():
             if boar_meat > 0:
                 boar_meat -= 1
                 character_dict[hero]["Item"]["Boar Meat"] = boar_meat
-                return(21, boar_meat)
+                return(22, boar_meat)
             elif boar_meat <= 0:
                 boar_meat = 0
                 print("You have no boar meat.\n")
