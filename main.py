@@ -5,6 +5,8 @@ import sys
 #characters = {"Hercules": {"Health": 50, "Attack": {"Sword": 18}}, "Nemean Lion": {"Health": 50, "Attack": {"Claw": 5, "Roar": 9}}, "Cerberus": {"Health": 50, "Attack": {"Bite": 11, "Strength of Hades", 13}}
 with open("characters.json") as file:
         character_dict = json.load(file)
+
+hero = "Hercules"
 defense = 0
 
 def death(monster):
@@ -35,35 +37,10 @@ def victory(monster):
             else:
                 print("Lion Skin equipped\nDefense +2")
                 defense += 2
-                       # character_dict["Hercules"]
-def boss_fight(boss, hero):        
-    print("You are in a boss fight vs", boss)
-    print("Type text command:  'Attack' or 'Item'")
-    while (character_dict[boss]["Health"] > 0) and (character_dict[hero]["Health"] > 0):
-        print(hero, "HP: ", character_dict[hero]["Health"])
-        print(boss, "HP: ", character_dict[boss]["Health"])
-        action = input("Choose an action: ").strip().lower()
-        if action == "attack":
-            attack_damage = attack()
-            character_dict[boss]["Health"] -= attack_damage
-            hero_damaged = random_attack(boss)
-            character_dict[hero]["Health"] -= hero_damaged
-
-        elif action == "item":
-            item_effect = item()
-            character_dict[hero]["Health"] += item_effect
-            print(hero, " is healed +25 HP")
-            hero_damaged = random_attack(boss)
-            character_dict[hero]["Health"] -= hero_damaged
-            print(boss, "inflicts", hero_damaged, "damage")
-
-    if (character_dict[boss]["Health"] <= 0):
-        victory(boss)
-    else:
-        death(boss)
-
+   
 def attack():
-    attack_prompt = "Attack with Sword or Fist?\n Type text command:  'Sword' or 'Fist'"
+    # attack_prompt = input("Attack with Sword or Fist?\n Type text command:  'Sword' or 'Fist'"
+    print(hero, "attacks with Sword")
     return(10)
 
 def item():
@@ -84,12 +61,44 @@ def random_attack(boss):
         damage = character_dict[boss]["Attack"][1][1]
     return(damage)
 
+def boss_fight(boss):
+    print("You are in a boss fight vs", boss)
+    print()
+    print(hero, "HP: ", character_dict[hero]["Health"])
+    print(boss, "HP: ", character_dict[boss]["Health"])        
+    print("\nType text command:  'Attack' or 'Item'")
+    while (character_dict[boss]["Health"] > 0) and (character_dict[hero]["Health"] > 0):
+        action = input("Choose an action: ").strip().lower()
+        if action == "attack":
+            attack_damage = attack()
+            character_dict[boss]["Health"] -= attack_damage
+            hero_damaged = random_attack(boss)
+            character_dict[hero]["Health"] -= hero_damaged + defense
+            print(boss, "inflicts", hero_damaged, "damage\n")
+            print(hero, "HP: ", character_dict[hero]["Health"])
+            print(boss, "HP: ", character_dict[boss]["Health"])
+
+        elif action == "item":
+            item_effect = item()
+            character_dict[hero]["Health"] += item_effect
+            print(hero, " is healed +25 HP")
+            hero_damaged = random_attack(boss)
+            character_dict[hero]["Health"] -= hero_damaged + defense
+            print(boss, "inflicts", hero_damaged, "damage\n")
+            print(hero, "HP: ", character_dict[hero]["Health"])
+            print(boss, "HP: ", character_dict[boss]["Health"])
+
+    if (character_dict[boss]["Health"] <= 0):
+        victory(boss)
+    else:
+        death(boss)
+
+
 def main():
     
     print("""
         \nYou are Hercules, the greatest of the Greek Heroes!
-You have been tasked by King Eurystheus to slay the vicious Nemean Lion, defeat the
-nine-headed Lernaean Hydra, and capture Cerberus, the guard dog of the underworld.\n
+You have been tasked by King Eurystheus to slay the vicious Nemean Lion, defeat the nine-headed Lernaean Hydra and capture Cerberus--the guard dog of the underworld.\n
 """)
     user_prompt = input("Start Game (y/n): ").strip().lower()
     while user_prompt not in ["y","n"]:
@@ -98,11 +107,10 @@ nine-headed Lernaean Hydra, and capture Cerberus, the guard dog of the underworl
         print("\nGame Over")
     else:
         print("""
-        \nYou make the long journey to the Nemean Lion.
-The lion laughs and snarls, 'You dare challenge me?'\n
+        \nYou make the long journey to the Nemean hills.
+        The Nemean lion laughs and snarls, 'You dare challenge me?'\n
 """)
-        hero = "Hercules"
-        boss_fight("Nemean Lion", hero)
+        boss_fight("Nemean Lion")
 
 
 
