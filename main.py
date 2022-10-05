@@ -126,20 +126,39 @@ def run():
             return(0, boar_meat, True)
         
         
-    def random_attack(boss):
+    def random_attack(boss, dead):
+        s(1)
         attack_int = random.randint(0,1)
-        if attack_int == 0:
-            print(boss, "attacks with", character_dict[boss]["Attack"][0][0])
-            damage = character_dict[boss]["Attack"][0][1]
+        if dead == False:
+            if attack_int == 0:
+                print(boss, "attacks with", character_dict[boss]["Attack"][0][0])
+                damage = character_dict[boss]["Attack"][0][1]
+            else:
+                print(boss, "attacks with", character_dict[boss]["Attack"][1][0])
+                damage = character_dict[boss]["Attack"][1][1]
+            if random.random() < 0.05:
+                print(boss, "misses.")
+                damage = 0
         else:
-            print(boss, "attacks with", character_dict[boss]["Attack"][1][0])
-            damage = character_dict[boss]["Attack"][1][1]
-        if random.random() < 0.05:
-            print(boss, "misses.")
-            damage = 0
+            print("With their last dying breath.....")
+            s(1)
+            if random.random() < 0.5:
+                print(boss, "lunges at you, but you dodge the blow easily.")
+                damage = 0
+            else:
+                if attack_int == 0:
+                    print(boss, "attacks with", character_dict[boss]["Attack"][0][0])
+                    damage = character_dict[boss]["Attack"][0][1]
+                else:
+                    print(boss, "attacks with", character_dict[boss]["Attack"][1][0])
+                    damage = character_dict[boss]["Attack"][1][1]
+                if random.random() < 0.05:
+                    print(boss, "misses.")
+                    damage = 0
         return(damage)
 
     def boss_fight(boss):
+        dead = False
         s(1)
         hero_health = int(character_dict[hero]["Health"])
         boss_health = int(character_dict[boss]["Health"])
@@ -160,7 +179,9 @@ def run():
                 boss_health -= attack_damage
                 s(1)
                 print(hero, "inflicts", attack_damage, "damage")
-                hero_damaged = random_attack(boss)
+                if boss_health <= 0:
+                    dead = True
+                hero_damaged = random_attack(boss, dead)
                 hero_health = (hero_health - hero_damaged) + defense
                 s(1)
                 print(boss, "inflicts", hero_damaged, "damage\n")
@@ -186,7 +207,7 @@ def run():
                     print("While checking your inventory")
                     s(1)
                     print("you are ambushed.\n")
-                hero_damaged = random_attack(boss)
+                hero_damaged = random_attack(boss, dead)
                 hero_health = (hero_health - hero_damaged) + defense
                 s(1)
                 print(boss, "inflicts", hero_damaged, "damage\n")
