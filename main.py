@@ -69,6 +69,9 @@ def run():
             if defense == 0:
                 s(3)
                 print("'Skinless' bonus acheived!")
+            if character_dict[hero]["Attack"][0] == ["Poison Arrows", 15]:
+                s(3)
+                print("'Poisonless' bonus acheived!")
             s(1)
             print("Game by voolyvex")
             sys.exit()
