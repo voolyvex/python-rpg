@@ -69,7 +69,7 @@ def run():
             if defense == 0:
                 s(3)
                 print("'Skinless' bonus acheived!")
-            if character_dict[hero]["Attack"][0] == ["Poison Arrows", 15]:
+            if character_dict[hero]["Attack"][0][0] != "Poison Arrows":
                 s(3)
                 print("'Poisonless' bonus acheived!")
             s(1)
