@@ -49,19 +49,40 @@ class Controller(QMainWindow, Ui_MainWindow):
         self.set_image_right("img/hero_lion_hugs.jpg")
         self.story_text("You make the long & humbling journey to Nemea.\nThe Nemean Lion snarls, 'Dare thee challenge?!'")
         self.fight_text("You are in a boss fight vs Nemean Lion")
+        self.boss = "Nemean Lion"
+        hero_health = int(self.character_dict[self.hero]["Health"])
+        boss_health = int(self.character_dict[self.boss]["Health"])
+        self.hero_LCD.setProperty("intValue", hero_health)
+        self.boss_LCD.setProperty("intValue", boss_health)
         self.startButton.clicked.connect(self.main_narrative2)    
     def main_narrative2(self):
         self.set_image_left("img/hydra.jpg")
         self.set_image_right("img/hero_hydra_with_lion_skin.jpg")
         self.story_text("You travel to the outskirts of Lerna and find the\nadorable lair of the Laernean Hydra.\nOne of the nine heads hisses, 'Dieeee.'")
         self.fight_text("You are in a boss fight vs Laernean Hydra")
+        self.boss = "Lernaean Hydra"
+        hero_health = int(self.character_dict[self.hero]["Health"])
+        boss_health = int(self.character_dict[self.boss]["Health"])
+        self.hero_LCD.setProperty("intValue", hero_health)
+        self.boss_LCD.setProperty("intValue", boss_health)
         self.startButton.clicked.connect(self.main_narrative3)
     def main_narrative3(self):
         self.set_image_left("img/cerberus_by_moonxels.jpg")
         self.set_image_right("img/femme_hercules.jpg")
         self.story_text("Finally, the entrance to Hell. Oh wow look it's Cerberus. Nice doggy.\n\tNiiiiice doggy.")
         self.fight_text("You are in a boss fight vs Cerberus")
-            
+        self.boss = "Cerberus"
+        hero_health = int(self.character_dict[self.hero]["Health"])
+        boss_health = int(self.character_dict[self.boss]["Health"])
+        self.hero_LCD.setProperty("intValue", hero_health)
+        self.boss_LCD.setProperty("intValue", boss_health)
+        self.startButton.clicked.connect(self.ending)
+    def ending(self):
+        self.set_image_left("img/ruins_art_armand-bovoso.jpg")
+        self.set_image_right("img/hero_lion.jpg")
+        self.story_text("GAME OVER")
+        self.fight_text("Congratulations! You captured Cerberus.\nKing Eurystheus is actually terrified of Cerberus,\nso you release him back to Hades.")
+
         
 
     def death(self, monster):
@@ -109,10 +130,7 @@ class Controller(QMainWindow, Ui_MainWindow):
                     self.character_dict[self.hero]["Attack"][0] = ["Poison Arrows", 15]
         else:
             
-            self.fight_text("Congratulations! You captured Cerberus.")
-            
-            self.fight_text("King Eurystheus is actually terrified of Cerberus,")
-            self.fight_text("so you release him back to Hades.")
+            self.fight_text("Congratulations! You captured Cerberus.\nKing Eurystheus is actually terrified of Cerberus,\nso you release him back to Hades.")
             
             self.fight_text("You won the game.")
             if defense == 0:
