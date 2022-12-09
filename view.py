@@ -260,7 +260,8 @@ class Ui_MainWindow(object):
                                         "border-bottom-color: rgb(255, 0, 255);\n"
                                         "border-color: rgb(174, 119, 61);\n"
                                         "border-width: 3px;\n"
-                                        "padding: 3px;\n")
+                                        "padding: 36px;\n"
+                                        )
         self.narratorText_1.setFrameShape(QtWidgets.QFrame.Panel)
         self.narratorText_1.setFrameShadow(QtWidgets.QFrame.Raised)
         self.narratorText_1.setLineWidth(5)
@@ -281,11 +282,11 @@ class Ui_MainWindow(object):
                                         "border-bottom-color: rgb(255, 0, 255);\n"
                                         "border-color: rgb(174, 119, 61);\n"
                                         "border-width: 3px;\n"
-                                        "padding: 3px;\n"
+                                        "padding: 34px;\n"
                                         )
         self.narratorText_2.setFrameShape(QtWidgets.QFrame.Panel)
         self.narratorText_2.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.narratorText_2.setLineWidth(1)
+        self.narratorText_2.setLineWidth(5)
         self.narratorText_2.setMidLineWidth(1)
         self.narratorText_2.setWordWrap(True)
         self.narratorText_2.setObjectName("narratorText_2")
