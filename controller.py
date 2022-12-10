@@ -1,44 +1,33 @@
 from view import *
 from PyQt5.QtWidgets import *
-import random
-import json
 
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
 class Controller(QMainWindow, Ui_MainWindow):
     
-    def __init__(self, *args, **kwargs):
-        super(Controller, self).__init__(*args, **kwargs)
+    def __init__(self):
+        super(Controller, self).__init__()
         self.setupUi(self)
-        self.story_text("Press START to play")
+        self.story_text("Press START ---->")
         self.fight_text("\t    Welcome to HERAKLES Adventure!\n'Ut aliquam purus sit amet luctus venenatis lectus. Velit euismod in pellentesque massa placerat duis ultricies lacus sed.Ut aliquam purus sit amet luctus venenatis lectus. Velit euismod in pellentesque massa placerat duis ultricies lacus sed.'")
         self.setWindowTitle("HERAKLES")
         self.Title_2.setText("Adventure")
         self.Title_1.setText("HERAKLES")
-        self.boss_health_label.setText("Boss HP")
-        self.hero_health_label.setText("Hero HP")
-        self.itemButton.setToolTip("Use Item: Boar Meat")
-        self.itemButton.setText("Item")
-        self.attackButton.setToolTip("Execute a random attack")
-        self.attackButton.setText("Attack")
+        self.boss_health_label.setText("STORY\nCOMPLETION:\n%")
+        self.boss_LCD.setProperty("intValue", 00)
         self.startButton.setText("START")
         self.set_image_left("img/landscape_greece_parthenon.jpg")
         self.set_image_right("img/hero_lion_skin_stylized.jpg")
         self.hero = "Herakles"
-        try:  # load character stats from json
-            with open("characters.json") as file:
-                self.character_dict = json.load(file)
-        except FileNotFoundError as e:
-            print(f"Exception: {e}")
                 
         self.startButton.clicked.connect(lambda: self.run())
 
     def run(self):
         self.set_image_right("img/hero_centaur.jpg")
         self.set_image_left("img/greece_ruins.jpg")
-        self.hero_LCD.setProperty("intValue", 000)
-        self.boss_LCD.setProperty("intValue", 000)
+        
+        self.boss_LCD.setProperty("intValue", 20)
         self.story_text("You are Herakles of ancient legend.\nYou have been tasked by King Eurystheus to slay the\nvicious Nemean Lion, defeat the nine-headed Lernaean\nHydra, and capture Cerberus--the guard dog of the underworld.")
         self.fight_text("Click CONTINUE ---->")
         self.startButton.setText("CONTINUE")
@@ -49,39 +38,33 @@ class Controller(QMainWindow, Ui_MainWindow):
         self.set_image_right("img/hero_lion_hugs.jpg")
         self.story_text("You make the long & humbling journey to Nemea.\nThe Nemean Lion snarls, 'Dare thee challenge?!'")
         self.fight_text("You are in a boss fight vs Nemean Lion")
-        self.boss = "Nemean Lion"
-        hero_health = int(self.character_dict[self.hero]["Health"])
-        boss_health = int(self.character_dict[self.boss]["Health"])
-        self.hero_LCD.setProperty("intValue", hero_health)
-        self.boss_LCD.setProperty("intValue", boss_health)
+        
+        self.boss_LCD.setProperty("intValue", 40)
         self.startButton.clicked.connect(self.main_narrative2)    
     def main_narrative2(self):
         self.set_image_left("img/hydra.jpg")
         self.set_image_right("img/hero_hydra_with_lion_skin.jpg")
         self.story_text("You travel to the outskirts of Lerna and find the\nadorable lair of the Laernean Hydra.\nOne of the nine heads hisses, 'Dieeee.'")
         self.fight_text("You are in a boss fight vs Laernean Hydra")
-        self.boss = "Lernaean Hydra"
-        hero_health = int(self.character_dict[self.hero]["Health"])
-        boss_health = int(self.character_dict[self.boss]["Health"])
-        self.hero_LCD.setProperty("intValue", hero_health)
-        self.boss_LCD.setProperty("intValue", boss_health)
+        
+        
+        self.boss_LCD.setProperty("intValue", 60)
         self.startButton.clicked.connect(self.main_narrative3)
     def main_narrative3(self):
         self.set_image_left("img/cerberus_by_moonxels.jpg")
         self.set_image_right("img/femme_hercules.jpg")
         self.story_text("Finally, the entrance to Hell. Oh wow look it's Cerberus. Nice doggy.\n\tNiiiiice doggy.")
         self.fight_text("You are in a boss fight vs Cerberus")
-        self.boss = "Cerberus"
-        hero_health = int(self.character_dict[self.hero]["Health"])
-        boss_health = int(self.character_dict[self.boss]["Health"])
-        self.hero_LCD.setProperty("intValue", hero_health)
-        self.boss_LCD.setProperty("intValue", boss_health)
+        
+        self.boss_LCD.setProperty("intValue", 80)
         self.startButton.clicked.connect(self.ending)
     def ending(self):
         self.set_image_left("img/ruins_art_armand-bovoso.jpg")
         self.set_image_right("img/hero_lion.jpg")
         self.story_text("GAME OVER")
         self.fight_text("Congratulations! You captured Cerberus.\nKing Eurystheus is actually terrified of Cerberus,\nso you release him back to Hades.")
+        
+        self.boss_LCD.setProperty("intValue", 100)
         self.startButton.setText("THE END")
 """
     Developer note: The following game logic to be integrated with gui interface in 2023.
